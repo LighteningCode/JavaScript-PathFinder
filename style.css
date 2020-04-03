@@ -1,0 +1,76 @@
+#myTable{
+
+}
+:root{
+    --start-bg-color: rgb(0, 255, 13);
+    --start-color: #000000;
+
+    --end-bg-color: #ff4800;
+    --end-color: #000000;
+
+    --block-bg-color:#000000;
+    --block-color: white;
+
+    --checking-bg-color:#ffee00;
+    --checking-color: rgb(0, 0, 0);
+
+    --checked-bg-color:#9c9201;
+    --checked-color: rgb(0, 0, 0);
+
+    --h-bg: var(--block-bg-color);
+    --h-c: var(--block-color);
+}
+
+*{
+    user-select: none;
+}
+
+td{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.h_start{
+    --h-bg: var(--start-bg-color);
+    --h-c: var(--start-color);
+}
+.h_end{
+    --h-bg: var(--end-bg-color);
+    --h-c: var(--end-color);
+}
+.h_block{
+    --h-bg: var(--block-bg-color);
+    --h-c: var(--block-color);
+}
+
+.checking{
+    background-color: var(--checking-bg-color);
+    color: var(--checking-color);
+}
+
+.checked{
+    background-color: var(--checked-bg-color);
+    color: var(--checked-color);
+}
+
+td:hover{
+    background-color: var(--h-bg);
+    color: var(--h-c);
+}
+
+
+.start{
+    background-color: rgb(0, 255, 13);
+    color: rgb(0, 0, 0);
+}
+
+.end{
+    background-color: #ff4800;
+    color: rgb(0, 0, 0);
+}
+
+.block{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
