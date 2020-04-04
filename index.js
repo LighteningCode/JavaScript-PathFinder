@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $("#endPointer").fadeOut();
+
     var checkingPoints = []
 
     const body = document.body;
@@ -33,7 +35,6 @@ $(document).ready(function () {
             y: value.y
         }
         console.log(startCoord);
-
     }
     function storeEndCoord(value) {
         endCoord = {
@@ -61,10 +62,14 @@ $(document).ready(function () {
 
     function checkBlockOrEnd(coord) {
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("end")) {
-            return true
+            $("#endPointer").fadeIn();
+            return "end"
         };
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("block")) {
-            return true
+            return "blocked"
+        };
+        if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("checking")) {
+            return "checking"
         };
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("item")) {
             //create a lag with the timeer
@@ -81,8 +86,11 @@ $(document).ready(function () {
         let coordY = currentCoord.y
         coordX = preventNegative(coordX - 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+        if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -94,8 +102,11 @@ $(document).ready(function () {
         coordX = preventNegative(coordX - 1)
         coordY = preventNegative(coordY + 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -108,8 +119,11 @@ $(document).ready(function () {
         coordX = preventNegative(coordX - 1)
         coordY = preventNegative(coordY - 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -122,8 +136,11 @@ $(document).ready(function () {
         let coordY = currentCoord.y
         coordX = preventNegative(coordX + 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -136,8 +153,11 @@ $(document).ready(function () {
         coordX = preventNegative(coordX + 1)
         coordY = preventNegative(coordY + 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -150,8 +170,11 @@ $(document).ready(function () {
         coordX = preventNegative(coordX + 1)
         coordY = preventNegative(coordY - 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -163,8 +186,11 @@ $(document).ready(function () {
         let coordY = currentCoord.y
         coordY = preventNegative(coordY + 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -176,8 +202,11 @@ $(document).ready(function () {
         let coordY = currentCoord.y
         coordY = preventNegative(coordY - 1)
         let coord = { x: coordX, y: coordY }
-        if (checkBlockOrEnd(coord)) {
-            return { x: -1, y: -1 }
+        if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
+            return { x: "blocked", y: "blocked" }
+        }
+          if (checkBlockOrEnd(coord) == "end") {
+            return { x: "end", y: "end" }
         }
         console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
@@ -341,38 +370,140 @@ $(document).ready(function () {
         activateClicks()
     })
 
+    var infected = []
+    var newInfected = [];
+
     $("#playbtn").click(function (e) {
         e.preventDefault();
 
-        var N = checkN(startCoord)
-        var NE = checkNE(startCoord)
-        var NW = checkNW(startCoord)
+        infected[0] = startCoord
 
-        var S = checkS(startCoord)
-        var SE = checkSE(startCoord)
-        var SW = checkSW(startCoord)
+      
 
-        var E = checkE(startCoord)
-        var W = checkW(startCoord)
 
-        var stop = setInterval(() => {
+        var newInfectedCounter = 0
 
-            N = checkN(N)
-            NE = checkNE(NE)
-            NW = checkNW(NW)
+        var el = true
 
-            S = checkS(S)
-            SE = checkSE(SE)
-            SW = checkSW(SW)
+        var innerLoop;
+    
+       var loop = setInterval(() => {
+            while (el) {
+                el = false
+    
+               innerLoop = setTimeout(() => {
+    
+                    console.log("copying");
+                    infected = [] //empty array
+                    //copy contents of newInfected to the infected and overwrite it
+                    for (let k = 0; k < newInfected.length; k++) {
+                        console.log(k);
+                        infected[k] = newInfected[k]
+                        console.log("copying");
+        
+                    }
+                    console.log(newInfected);
+                    console.log(infected);
+                    newInfectedCounter = 0
+    
+                    el = true
+                }, 1000);
+    
+                for (let i = 0; i < infected.length; i++) {
+    
+                    //for each one check to see if they 
+                    N = checkN(infected[i])
+                    NE = checkNE(infected[i])
+                    NW = checkNW(infected[i])
+        
+                    S = checkS(infected[i])
+                    SE = checkSE(infected[i])
+                    SW = checkSW(infected[i])
+        
+                    E = checkE(infected[i])
+        
+                    W = checkW(infected[i])
 
-            E = checkE(E)
-            W = checkW(W)
+
+                    //if end has been found stop loop
+                    if (N.x == "end" || N.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (NE.x == "end" || NE.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (NW.x == "end" || NW.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (S.x == "end" || S.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (SE.x == "end" || SE.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (SW.x == "end" || SW.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (E.x == "end" || E.y == "end") {
+                        clearInterval(loop)
+                    }
+                    if (W.x == "end" || W.y == "end") {
+                        clearInterval(loop)
+                    }
+                   
+    
+                    //add the new infected to the new array to be added.
+                    if (N.x != "blocked" || N.y != "blocked") {
+                        newInfected[newInfectedCounter] = N
+                        newInfectedCounter++
+                    }
+                    if (NE.x != "blocked" || NE.y != "blocked") {
+                        newInfected[newInfectedCounter] = NE
+                        newInfectedCounter++
+                    }
+                    if (NW.x != "blocked" || NW.y != "blocked") {
+                        newInfected[newInfectedCounter] = NW
+                        newInfectedCounter++
+                    }
+                    if (S.x != "blocked" || S.y != "blocked") {
+                        infected[newInfectedCounter] = S
+                        newInfectedCounter++
+                    }
+                    if (SE.x != "blocked" || SE.y != "blocked") {
+                        newInfected[newInfectedCounter] = SE
+                        newInfectedCounter++
+                    }
+                    if (SW.x != "blocked" || SW.y != "blocked") {
+                        newInfected[newInfectedCounter] = SW
+                        newInfectedCounter++
+                    }
+                    if (E.x != "blocked" || E.y != "blocked") {
+                        newInfected[newInfectedCounter] = E
+                        newInfectedCounter++
+                    }
+                    if (W.x != "blocked" || W.y != "blocked") {
+                        newInfected[newInfectedCounter] = W
+                        newInfectedCounter++
+                    }
+                }
+    
+            }
         }, 1000);
+    
+    
+    
+
+
 
         $("#stopBtn").click(function (e) {
             e.preventDefault();
-            clearInterval(stop)
+            clearInterval(loop)
         });
+
+
+
+
+
 
 
     });
