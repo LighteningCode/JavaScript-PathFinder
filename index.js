@@ -453,29 +453,40 @@ $(document).ready(function () {
                 let currentInfected = [N, NE, NW, S, SE, SW, W, E];
 
                 let l;
+                let count = 0;
                 // loop over the currentInfected and add them to the infected
                 for (l = 0; l < currentInfected.length; l++) {
                     const crd = currentInfected[l];
+                    
                     if (crd.x == "blocked" || crd.y == "blocked") {
-                        reject()
+                        resolve()
                         continue;
                     } else if (crd.x == "end" || crd.y == "end") {
-                        reject()
-                    }else{
-                         infected.add(JSON.stringify(crd));
+                        reject(crd)
+                    } else {
+                        infected.add(JSON.stringify(crd));
                         resolve()
                     }
                 }
+
             }, 100);
         })
     }
 
+    var mainCounter = 0;
+
     async function main() {
         for (const coordinate of infected) {
-            await asyncMethod(JSON.parse(coordinate)).then(function () {
-                main()
-            }, function () {
-                console.log("program has stopped");
+            await asyncMethod(JSON.parse(coordinate)).then(function (data) {
+                console.log(data);
+
+                if (data === 7) {
+                    console.log("Program will continue");
+                    main();
+                }
+            }, function (data) {
+                console.log(`Program has stopped end coordinate is ${data}`);
+                throw new Error("Completed");
             });
         }
     }
@@ -491,10 +502,9 @@ $(document).ready(function () {
 
         main();
 
-
         $("#stopBtn").click(function (e) {
             e.preventDefault();
-            clearInterval(loop)
+            throw new Error("Completed")
         });
 
     });
