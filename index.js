@@ -105,6 +105,7 @@ $(document).ready(function () {
 
     // function to check the northern coodinate
     function checkN(currentCoord) {
+
         let coordX = currentCoord.x
         let coordY = currentCoord.y
         coordX = preventNegative(coordX - 1)
@@ -121,8 +122,8 @@ $(document).ready(function () {
 
     // function to check the north-estern coodinate
     function checkNE(currentCoord) {
-        let coordX = currentCoord.x
-        let coordY = currentCoord.y
+        let coordX = currentCoord.x;
+        let coordY = currentCoord.y;
         coordX = preventNegative(coordX - 1)
         coordY = preventNegative(coordY + 1)
         let coord = { x: coordX, y: coordY }
@@ -175,6 +176,7 @@ $(document).ready(function () {
 
     // function to check the south-eastern coodinate 
     function checkSE(currentCoord) {
+
         let coordX = currentCoord.x
         let coordY = currentCoord.y
         coordX = preventNegative(coordX + 1)
@@ -193,6 +195,8 @@ $(document).ready(function () {
 
     // function to check the south-western coodinate
     function checkSW(currentCoord) {
+
+
         let coordX = currentCoord.x
         let coordY = currentCoord.y
         coordX = preventNegative(coordX + 1)
@@ -211,6 +215,8 @@ $(document).ready(function () {
 
     // function to check the eastern coodinate
     function checkE(currentCoord) {
+
+
         let coordX = currentCoord.x
         let coordY = currentCoord.y
         coordY = preventNegative(coordY + 1)
@@ -228,6 +234,8 @@ $(document).ready(function () {
 
     // function to check the western coodinate
     function checkW(currentCoord) {
+
+
         let coordX = currentCoord.x
         let coordY = currentCoord.y
         coordY = preventNegative(coordY - 1)
@@ -251,6 +259,7 @@ $(document).ready(function () {
 
     // remove the current end point used when the user is interracting with the interface
     function removeEnd() {
+
         $(`[data-x="${endCoord.x}"],[data-y="${endCoord.y}"]`).removeClass('end');
         console.log("endRemoved");
     }
@@ -422,8 +431,7 @@ $(document).ready(function () {
         });
     })
 
-    var infected = [{ x: 6, y: 8 }]
-
+    var infected = new Set();
 
 
     function asyncMethod(coord) {
@@ -442,44 +450,34 @@ $(document).ready(function () {
 
                 let W = checkW(coord)
 
-                let count = 0;
                 let currentInfected = [N, NE, NW, S, SE, SW, W, E];
 
-                // delete all contents in the infected
-                // infected = [];
-
-                for (let o = 0; o < infected.length; o++) {
-                    delete infected[o];
-                }
-
-                console.log(infected[2]);
-
-                console.log(infected);
-
-                
-
-
+                let l;
                 // loop over the currentInfected and add them to the infected
-                for (let l = 0; l < currentInfected.length; l++) {
+                for (l = 0; l < currentInfected.length; l++) {
                     const crd = currentInfected[l];
                     if (crd.x == "blocked" || crd.y == "blocked") {
+                        reject()
                         continue;
-                    } else {
-                        infected[count] = crd;
-                        count++;
+                    } else if (crd.x == "end" || crd.y == "end") {
+                        reject()
+                    }else{
+                         infected.add(JSON.stringify(crd));
+                        resolve()
                     }
                 }
-                resolve()
-            }, 400);
+            }, 100);
         })
     }
 
     async function main() {
-        for (let index = 0; index < infected.length; index++) {
-            const element = infected[index];
-            await asyncMethod(element)
+        for (const coordinate of infected) {
+            await asyncMethod(JSON.parse(coordinate)).then(function () {
+                main()
+            }, function () {
+                console.log("program has stopped");
+            });
         }
-
     }
 
 
@@ -489,22 +487,15 @@ $(document).ready(function () {
 
     $("#playbtn").click(function (e) {
         e.preventDefault();
+        infected.add(JSON.stringify(startCoord))
 
-        setInterval(() => {
-            main();
-        }, 800);
+        main();
 
 
         $("#stopBtn").click(function (e) {
             e.preventDefault();
             clearInterval(loop)
         });
-
-
-
-
-
-
 
     });
 
