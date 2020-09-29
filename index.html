@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PathFinder</title>
     <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 
 
- 
-    <table id="myTable" border="1px">
-        <div id="endPointer">
-            <h1>END HAS BEEN FOUND</h1>
-        </div>
-    </table>
 
-    <button id="startbtn">Start</button> 
-    <button id="endbtn">End</button> 
-    <button id="blockbtn">Blocks</button> 
-    <button id="clearbtn">Clear</button> 
-    <button id="playbtn">Play</button> 
-    <button id="stopBtn">Stop</button> 
+    <div id="tableContainer">
+        <table id="myTable" border="1px">
+            <div id="endPointer">
+                <h1>END HAS BEEN FOUND</h1>
+            </div>
+        </table>
+    </div>
+    <div id="darkOverlay">
+
+    </div>
+
+    <div id="actionbtns">
+        <button id="startbtn">Start</button>
+        <button id="endbtn">End</button>
+        <button id="blockbtn">Blocks</button>
+        <button id="clearbtn">Clear</button>
+        <button id="playbtn">Play</button>
+        <button id="stopBtn">Stop</button>
+    </div>
+
+    <audio id="hoverTD" src="./PremiumBeat_0013_cursor_click_11.wav"></audio>
+    <audio id="startSFX" src="./PremiumBeat_0013_cursor_click_06.wav">
+    </audio>
+    <audio id="endSFX" src="./PremiumBeat_0013_cursor_click_18.wav"></audio>
 
     <script src="/jquery-3.4.1.min.js"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>

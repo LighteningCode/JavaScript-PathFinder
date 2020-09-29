@@ -1,21 +1,22 @@
 #myTable{
-
+    border: 1px solid rgb(235, 235, 235);
+    border-spacing: 0px;
 }
 :root{
-    --start-bg-color: rgb(0, 255, 13);
+    --start-bg-color: linear-gradient( rgb(150, 253, 155),rgb(0, 255, 21));
     --start-color: #000000;
 
-    --end-bg-color: #ff4800;
-    --end-color: #000000;
+    --end-bg-color:linear-gradient(#ff5e56,#ff0000);;
+    --end-color: #0a0a0a;
 
-    --block-bg-color:#000000;
+    --block-bg-color:linear-gradient(rgb(73, 73, 73), rgb(0, 0, 0));
     --block-color: white;
 
-    --checking-bg-color:#ffee00;
-    --checking-color: rgb(0, 0, 0);
+    --checking-bg-color:linear-gradient(rgb(255, 240, 103), rgb(250, 214, 14));
+    --checking-color: #0a0a0a;
 
-    --checked-bg-color:#9c9201;
-    --checked-color: rgb(0, 0, 0);
+    --checked-bg-color:linear-gradient(rgb(148, 141, 64), rgb(194, 166, 6));
+    --checked-color: #0a0a0a;
 
     --h-bg: var(--block-bg-color);
     --h-c: var(--block-color);
@@ -25,10 +26,41 @@
     user-select: none;
 }
 
+button{
+    width: 15vw;
+    height: 35px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+
+#actionbtns{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    padding: 15px 0px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(185, 185, 185);
+}
+
 td{
-    width: 50px;
-    height: 50px;
+    width: 5vw;
+    height:6.5vh;
     text-align: center;
+    font-size: .86em;
+}
+
+#tableContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .h_start{
@@ -45,44 +77,59 @@ td{
 }
 
 .checking{
-    background-color: var(--checking-bg-color);
+    background-image: var(--checking-bg-color);
     color: var(--checking-color);
 }
 
 .checked{
-    background-color: var(--checked-bg-color);
+    background-image: var(--checked-bg-color);
     color: var(--checked-color);
 }
 
 td:hover{
-    background-color: var(--h-bg);
+    background-image: var(--h-bg);
     color: var(--h-c);
+    
 }
 
 
 .start{
-    background-color: rgb(0, 255, 13);
+    background-image: var(--start-bg-color);
     color: rgb(0, 0, 0);
 }
 
 .end{
-    background-color: #ff4800;
-    color: rgb(0, 0, 0);
+    background-image: var(--end-bg-color);
+    color: rgb(255, 255, 255);
 }
 
 .block{
-    background-color: rgb(0, 0, 0);
+    background-image: var(--block-bg-color);
     color: rgb(255, 255, 255);
 }
 
 
 #endPointer{
     position: absolute;
+    text-align: center;
     top: 33vh;
-    left: 13vh;
+    left: 13.6vw;
+    border: 1px solid grey;
+    border-radius: 5px;
     width: 500px;
     padding: 10px 13%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.527);
     color: red;
     background-color: rgb(56, 56, 56);
     z-index: 1000;
+}
+
+#darkOverlay{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.466);
+    z-index: 800;
 }

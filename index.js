@@ -1,9 +1,12 @@
+'use strict'
+
 $(document).ready(function () {
 
     $("#endPointer").fadeOut();
+    $("#darkOverlay").fadeOut();
 
     var checkingPoints = []
-
+    //Generate a grid of squares 
     const body = document.body;
     for (var i = 0; i < 13; i++) {
         let row = `<tr>`;
@@ -17,18 +20,22 @@ $(document).ready(function () {
         $("#myTable").append(row);
     }
 
+    // idk what this does
     $("body").addClass('h_block');
 
 
+
+    // flags
     var start = false;
     var end = false;
     var block = true;
     var clear = false
 
-
+    // start coordinates
     var startCoord = { x: 0, y: 0 }
     var endCoord = { x: 0, y: 0 }
 
+    // function to get and store the start coordinates in the global variable
     function storeStartCoord(value) {
         startCoord = {
             x: value.x,
@@ -36,6 +43,8 @@ $(document).ready(function () {
         }
         console.log(startCoord);
     }
+
+    // function to get and store end coordinates in the global variable
     function storeEndCoord(value) {
         endCoord = {
             x: value.x,
@@ -43,13 +52,16 @@ $(document).ready(function () {
         }
     }
 
+    // function to add class to coordinates
     function AddClassToCoord(coord, className) {
         $(`[data-x="${coord.x}"][data-y="${coord.y}"]`).addClass(className);
     }
+    // function to remove class form coordinates
     function removeClassFromCoord(coord, className) {
         $(`[data-x="${coord.x}"]+[data-y="${coord.y}"]`).removeClass(className);
     }
 
+    // this function will just return 0 if any value is below zero
     function preventNegative(value) {
         if (value < 0) {
             return 0;
@@ -58,19 +70,28 @@ $(document).ready(function () {
         }
     }
 
-    var counter = 0;
+    var counter = 0; // idk why this is here
 
+    // function to to check if the inputed coordinate is a block or the end
     function checkBlockOrEnd(coord) {
+        // if the input is the end return end and then fade the finishing items
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("end")) {
             $("#endPointer").fadeIn();
+            $("#darkOverlay").fadeIn();
             return "end"
         };
+
+        // state blocked 
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("block")) {
             return "blocked"
         };
+
+        // state checking
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("checking")) {
             return "checking"
         };
+
+        // if the block is not a checked, end, or blocked coord then then make it a checked block
         if ($(`[data-x="${coord.x}"][data-y="${coord.y}"]`).hasClass("item")) {
             //create a lag with the timeer
             setTimeout(() => {
@@ -81,6 +102,8 @@ $(document).ready(function () {
         }
     }
 
+
+    // function to check the northern coodinate
     function checkN(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -92,10 +115,11 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
     }
+
+    // function to check the north-estern coodinate
     function checkNE(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -105,14 +129,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the north-western coodinate
     function checkNW(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -122,14 +147,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the southern coodinate
     function checkS(currentCoord) {
 
         let coordX = currentCoord.x
@@ -139,14 +165,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the south-eastern coodinate 
     function checkSE(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -156,14 +183,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the south-western coodinate
     function checkSW(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -173,14 +201,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the eastern coodinate
     function checkE(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -189,14 +218,15 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
+
+    // function to check the western coodinate
     function checkW(currentCoord) {
         let coordX = currentCoord.x
         let coordY = currentCoord.y
@@ -205,21 +235,21 @@ $(document).ready(function () {
         if (checkBlockOrEnd(coord) == "blocked" || checkBlockOrEnd(coord) == "checking" || checkBlockOrEnd(coord) == "checked") {
             return { x: "blocked", y: "blocked" }
         }
-          if (checkBlockOrEnd(coord) == "end") {
+        if (checkBlockOrEnd(coord) == "end") {
             return { x: "end", y: "end" }
         }
-        console.log(arguments.callee.name, coord.x, coord.y);
         AddClassToCoord(coord, 'checking')
         return coord;
 
     }
 
-
+    // remove the current start point used when the user is interracting with the interface
     function removeStart() {
         $(`[data-x="${startCoord.x}"]+[data-y="${startCoord.y}"]`).removeClass('start');
         console.log("startRemoved");
     }
 
+    // remove the current end point used when the user is interracting with the interface
     function removeEnd() {
         $(`[data-x="${endCoord.x}"],[data-y="${endCoord.y}"]`).removeClass('end');
         console.log("endRemoved");
@@ -230,8 +260,7 @@ $(document).ready(function () {
         $(selector).removeClass("start");
     }
 
-    // console.log($(window).width() / 10);
-
+    // when clicked the body element will change the color of blocks when hovered over
     $("#startbtn").click(function (e) {
         e.preventDefault();
         start = true;
@@ -244,9 +273,9 @@ $(document).ready(function () {
         if ($(body).hasClass('h_block')) {
             body.classList.replace("h_block", "h_start")
         }
-
-
     });
+
+    // when clicked the body element will change the color of blocks when hovered over
     $("#endbtn").click(function (e) {
         e.preventDefault();
         start = false;
@@ -262,6 +291,8 @@ $(document).ready(function () {
         }
 
     });
+
+    // when clicked the body element will change the color of blocks when hovered over
     $("#blockbtn").click(function (e) {
         e.preventDefault();
         start = false;
@@ -275,17 +306,20 @@ $(document).ready(function () {
             body.classList.replace("h_start", "h_block")
         }
     });
+
+    // when clicked the body element will change the color of blocks when hovered over
     $("#clearbtn").click(function (e) {
         e.preventDefault();
 
         clear = true;
     });
 
+    // based on which type of button is activated at a particular time perform a different function
     function activateClicks() {
 
         $('#myTable td.item').click(function (e) {
 
-
+            // if the current coord does not have the class start and start is activated
             if (!$(this).hasClass("start") && start) {
 
                 removeStart();
@@ -301,6 +335,7 @@ $(document).ready(function () {
 
             }
 
+            // if the current coord does not have the class "block" and "block" is activated
             if (!$(this).hasClass("block") && block) {
                 $(this).addClass("block");
                 $(this).removeClass('start');
@@ -308,6 +343,7 @@ $(document).ready(function () {
                 console.log("block set");
             }
 
+            // if the current coord does not have the class end and end is activated
             if (!$(this).hasClass("end") && end) {
                 removeEnd()
                 let x = $(this).attr("data-x");
@@ -334,6 +370,7 @@ $(document).ready(function () {
 
     var mouseIsDown = false;
 
+    // when a coord is clicked and held down
     window.addEventListener('mousedown', function () {
         mouseIsDown = true;
 
@@ -361,138 +398,101 @@ $(document).ready(function () {
                 );
             }
         }, 50);
+
+        if (start == true) {
+            startSound()
+        }
+        if (end == true) {
+            endSound()
+        }
     })
 
+    // listen and play click events
     window.addEventListener('mouseup', function () {
         mouseIsDown = false;
         console.log("Mouse is up");
         $("#myTable td.item").off();
         activateClicks()
+
+        $("td").mouseenter(function () {
+            playHoverUI()
+        });
+        $("td").mouseout(function () {
+            stopHoverUI()
+        });
     })
 
-    var infected = []
-    var newInfected = [];
+    var infected = [{ x: 6, y: 8 }]
+
+
+
+    function asyncMethod(coord) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                //for each one check to see if they are not infected
+                let N = checkN(coord)
+                let NE = checkNE(coord)
+                let NW = checkNW(coord)
+
+                let S = checkS(coord)
+                let SE = checkSE(coord)
+                let SW = checkSW(coord)
+
+                let E = checkE(coord)
+
+                let W = checkW(coord)
+
+                let count = 0;
+                let currentInfected = [N, NE, NW, S, SE, SW, W, E];
+
+                // delete all contents in the infected
+                // infected = [];
+
+                for (let o = 0; o < infected.length; o++) {
+                    delete infected[o];
+                }
+
+                console.log(infected[2]);
+
+                console.log(infected);
+
+                
+
+
+                // loop over the currentInfected and add them to the infected
+                for (let l = 0; l < currentInfected.length; l++) {
+                    const crd = currentInfected[l];
+                    if (crd.x == "blocked" || crd.y == "blocked") {
+                        continue;
+                    } else {
+                        infected[count] = crd;
+                        count++;
+                    }
+                }
+                resolve()
+            }, 400);
+        })
+    }
+
+    async function main() {
+        for (let index = 0; index < infected.length; index++) {
+            const element = infected[index];
+            await asyncMethod(element)
+        }
+
+    }
+
+
+
+
+
 
     $("#playbtn").click(function (e) {
         e.preventDefault();
 
-        infected[0] = startCoord
-
-      
-
-
-        var newInfectedCounter = 0
-
-        var el = true
-
-        var innerLoop;
-    
-       var loop = setInterval(() => {
-            while (el) {
-                el = false
-    
-               innerLoop = setTimeout(() => {
-    
-                    console.log("copying");
-                    infected = [] //empty array
-                    //copy contents of newInfected to the infected and overwrite it
-                    for (let k = 0; k < newInfected.length; k++) {
-                        console.log(k);
-                        infected[k] = newInfected[k]
-                        console.log("copying");
-        
-                    }
-                    console.log(newInfected);
-                    console.log(infected);
-                    newInfectedCounter = 0
-    
-                    el = true
-                }, 1000);
-    
-                for (let i = 0; i < infected.length; i++) {
-    
-                    //for each one check to see if they 
-                    N = checkN(infected[i])
-                    NE = checkNE(infected[i])
-                    NW = checkNW(infected[i])
-        
-                    S = checkS(infected[i])
-                    SE = checkSE(infected[i])
-                    SW = checkSW(infected[i])
-        
-                    E = checkE(infected[i])
-        
-                    W = checkW(infected[i])
-
-
-                    //if end has been found stop loop
-                    if (N.x == "end" || N.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (NE.x == "end" || NE.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (NW.x == "end" || NW.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (S.x == "end" || S.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (SE.x == "end" || SE.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (SW.x == "end" || SW.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (E.x == "end" || E.y == "end") {
-                        clearInterval(loop)
-                    }
-                    if (W.x == "end" || W.y == "end") {
-                        clearInterval(loop)
-                    }
-                   
-    
-                    //add the new infected to the new array to be added.
-                    if (N.x != "blocked" || N.y != "blocked") {
-                        newInfected[newInfectedCounter] = N
-                        newInfectedCounter++
-                    }
-                    if (NE.x != "blocked" || NE.y != "blocked") {
-                        newInfected[newInfectedCounter] = NE
-                        newInfectedCounter++
-                    }
-                    if (NW.x != "blocked" || NW.y != "blocked") {
-                        newInfected[newInfectedCounter] = NW
-                        newInfectedCounter++
-                    }
-                    if (S.x != "blocked" || S.y != "blocked") {
-                        infected[newInfectedCounter] = S
-                        newInfectedCounter++
-                    }
-                    if (SE.x != "blocked" || SE.y != "blocked") {
-                        newInfected[newInfectedCounter] = SE
-                        newInfectedCounter++
-                    }
-                    if (SW.x != "blocked" || SW.y != "blocked") {
-                        newInfected[newInfectedCounter] = SW
-                        newInfectedCounter++
-                    }
-                    if (E.x != "blocked" || E.y != "blocked") {
-                        newInfected[newInfectedCounter] = E
-                        newInfectedCounter++
-                    }
-                    if (W.x != "blocked" || W.y != "blocked") {
-                        newInfected[newInfectedCounter] = W
-                        newInfectedCounter++
-                    }
-                }
-    
-            }
-        }, 1000);
-    
-    
-    
-
+        setInterval(() => {
+            main();
+        }, 800);
 
 
         $("#stopBtn").click(function (e) {
@@ -508,4 +508,46 @@ $(document).ready(function () {
 
     });
 
+    $("td").mouseenter(function () {
+        playHoverUI()
+    });
+    $("td").mouseout(function () {
+        stopHoverUI()
+    });
+
+
+
+
+
+
+    function playHoverUI(soundObj) {
+        var sound = document.getElementById("hoverTD")
+        sound.play()
+    }
+
+    function stopHoverUI() {
+        var sound = document.getElementById("hoverTD")
+        sound.pause()
+        sound.currentTime = 0
+    }
+
+
+    function startSound() {
+        var sound = document.getElementById("startSFX")
+        sound.play()
+    }
+    function stop_startSound() {
+        var sound = document.getElementById("startSFX")
+        sound.pause()
+        sound.currentTime = 0
+    }
+
+    function endSound() {
+        var sound = document.getElementById("endSFX")
+        sound.play()
+    }
+    function stop_endSound() {
+        var sound = document.getElementById("endSFX")
+        sound.play()
+    }
 });
