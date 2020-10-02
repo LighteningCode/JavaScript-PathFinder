@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PathFinder</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/fontawesome-free-5/css/all.min.css">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
     <div id="tableContainer">
         <table id="myTable" border="1px">
             <div id="endPointer">
-                <h1>END HAS BEEN FOUND</h1>
+                <h1>End position found <button id="reset">Reset <i class="fa fa-undo" aria-hidden="true"></i></button></h1>
             </div>
         </table>
     </div>
@@ -24,12 +25,12 @@
     </div>
 
     <div id="actionbtns">
-        <button id="startbtn">Start</button>
-        <button id="endbtn">End</button>
-        <button id="blockbtn">Blocks</button>
-        <button id="clearbtn">Clear</button>
-        <button id="playbtn">Play</button>
-        <button id="stopBtn">Stop</button>
+        <button id="startbtn"><i class="fa fa-arrow-right" aria-hidden="true"></i> Start</button>
+        <button id="endbtn"><i class="fa fa-arrow-left" aria-hidden="true"></i> End</button>
+        <button id="blockbtn"><i class="fa fa-stop" aria-hidden="true"></i> Blocks</button>
+        <button id="clearbtn"><i class="fa fa-eraser" aria-hidden="true"></i> Remove Block</button>
+        <button id="playbtn"><i class="fa fa-play-circle" aria-hidden="true"></i> <b>Play</b></button>
+        <button id="stopBtn"><i class="fa fa-stop-circle" aria-hidden="true"></i> <b>Stop</b></button>
     </div>
 
     <audio id="hoverTD" src="./PremiumBeat_0013_cursor_click_11.wav"></audio>
@@ -38,6 +39,7 @@
     <audio id="endSFX" src="./PremiumBeat_0013_cursor_click_18.wav"></audio>
 
     <script src="/jquery-3.4.1.min.js"></script>
+    <script src="/fontawesome-free-5/js/all.min.js"></script>
     <script src="./index.js"></script>
 </body>
 

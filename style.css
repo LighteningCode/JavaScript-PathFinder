@@ -31,6 +31,36 @@ button{
     height: 35px;
     margin-left: 2px;
     margin-right: 2px;
+    border-radius: 5px;
+}
+
+#startbtn{
+    border: 2px solid #00ff15;
+    background-image: var(--start-bg-color);
+}
+
+#endbtn{
+    border: 2px solid #ff0000;
+    background-image: var(--end-bg-color);
+}
+
+#blockbtn{
+    border: 2px solid #1f1f1f;
+    color: white;
+    background-image: var(--block-bg-color);
+}
+
+#stopBtn{
+    color: #ff0000;
+    background-color: #2b2b2b;
+    border: 1px solid #ff0000;
+}
+
+#playbtn{
+    color: #00ff15;
+    background-color: #2b2b2b;
+    border: 1px solid #00ff15;
+
 }
 
 body{
@@ -71,6 +101,7 @@ td{
     --h-bg: var(--end-bg-color);
     --h-c: var(--end-color);
 }
+
 .h_block{
     --h-bg: var(--block-bg-color);
     --h-c: var(--block-color);
@@ -116,12 +147,17 @@ td:hover{
     left: 13.6vw;
     border: 1px solid grey;
     border-radius: 5px;
-    width: 500px;
+    width: 50%;
     padding: 10px 13%;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.527);
-    color: red;
+    color: rgb(255, 255, 255);
     background-color: rgb(56, 56, 56);
     z-index: 1000;
+}
+
+#endPointer  span{
+    color: black;
+    background-color: white;
 }
 
 #darkOverlay{

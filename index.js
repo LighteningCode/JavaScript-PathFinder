@@ -24,6 +24,10 @@ $(document).ready(function () {
     $("body").addClass('h_block');
 
 
+    $("#reset").click(function (e) { 
+        e.preventDefault();
+        location.reload();
+    });
 
     // flags
     var start = false;
@@ -433,6 +437,7 @@ $(document).ready(function () {
 
     var infected = new Set();
 
+    var infectedCount = 0
 
     function asyncMethod(coord) {
         return new Promise(function (resolve, reject) {
@@ -464,7 +469,12 @@ $(document).ready(function () {
                     } else if (crd.x == "end" || crd.y == "end") {
                         reject(crd)
                     } else {
-                        infected.add(JSON.stringify(crd));
+                        if (!infected.has(JSON.stringify(crd))) {
+                            infected.add(JSON.stringify(crd));
+                        }
+                        console.log(infected);
+                        
+                        infectedCount += 1;
                         resolve()
                     }
                 }
@@ -484,15 +494,24 @@ $(document).ready(function () {
                     console.log("Program will continue");
                     main();
                 }
+
             }, function (data) {
                 console.log(`Program has stopped end coordinate is ${data}`);
                 throw new Error("Completed");
             });
+            console.log(infectedCount);
+            if (infectedCount > 250) {
+                throw new Error("Fail")
+            }
         }
+
+ 
     }
 
 
 
+
+  
 
 
 
