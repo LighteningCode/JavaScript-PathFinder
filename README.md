@@ -36,7 +36,7 @@ Example 2
 
 
 ###### What I think about this
-When i find time ill try to understand what I have built, sometimes when I go back to look at the code I cant event remember what I did for this to work.
+When i find time ill try to understand what I have built, sometimes when I go back to look at the code I cant even remember what I did for this to work.
 
 
 The only thing I know for sure, and I remember that made the path finding a little faster was using the `WeakSet` data structure to prevent duplicates
