@@ -41,4 +41,4 @@ When i find time ill try to understand what I have built, sometimes when I go ba
 
 The only thing I know for sure, and I remember that made the path finding a little faster was using the `WeakSet` data structure to prevent duplicates
 
-Apart from that. I am literally blank on what actually happened when i was building it.
+Apart from that. I am literally blank on what actually happened when i was building it. 
